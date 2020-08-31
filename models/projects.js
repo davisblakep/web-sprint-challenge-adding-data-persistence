@@ -12,6 +12,7 @@ function getProjectTasks(id) {
     .select(
       "projects.id as projectId",
       "tasks.description",
+      "tasks.id as task_id",
       "tasks.completed as task_completed"
     );
 }
@@ -39,6 +40,14 @@ function addProject(project) {
     .then(([id]) => getProjectsById(id));
 }
 
+function addTaskToProjectById(data) {
+  return db("project_tasks").insert(data);
+}
+
+function addResourceToProjectById(data) {
+  return db("project_resources").insert(data);
+}
+
 function updateProject(changes, id) {
   return db("projects").where({ id }).update(changes);
 }
@@ -55,4 +64,6 @@ module.exports = {
   deleteProject,
   getProjectTasks,
   getProjectResources,
+  addTaskToProjectById,
+  addResourceToProjectById,
 };

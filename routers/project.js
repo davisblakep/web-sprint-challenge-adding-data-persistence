@@ -66,6 +66,34 @@ router.post("/projects", (req, res) => {
     });
 });
 
+router.post("/projects/tasks", (req, res) => {
+  const data = req.body;
+
+  Project.addTaskToProjectById(data)
+    .then((project) => {
+      res.status(201).json(project);
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .json({ message: "Failed to add a new task to the project." });
+    });
+});
+
+router.post("/projects/resources", (req, res) => {
+  const data = req.body;
+
+  Project.addResourceToProjectById(data)
+    .then((project) => {
+      res.status(201).json(project);
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .json({ message: "Failed to add a new resource to the project." });
+    });
+});
+
 router.put("/projects/:id", (req, res) => {
   const { id } = req.params;
   const changes = req.body;
