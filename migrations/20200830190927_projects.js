@@ -32,9 +32,15 @@ exports.up = async function (knex) {
     //   .onDelete("CASCADE")
     //   .onUpdate("CASCADE");
   });
+
+  await knex.schema.createTable("project_resources", (table) => {
+    table.integer("project_id").notNull();
+    table.integer("resource_id").notNull();
+  });
 };
 
 exports.down = async function (knex) {
+  await knex.schema.dropTableIfExists("project_resources");
   await knex.schema.dropTableIfExists("project_tasks");
   await knex.schema.dropTableIfExists("tasks");
   await knex.schema.dropTableIfExists("resources");
