@@ -12,6 +12,7 @@ function getProjectTasks(id) {
     .select(
       "projects.id as projectId",
       "tasks.description",
+      "tasks.notes",
       "tasks.id as task_id",
       "tasks.completed as task_completed"
     );
