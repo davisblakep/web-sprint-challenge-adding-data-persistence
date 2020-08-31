@@ -26,6 +26,20 @@ router.get("/projects/:id", async (req, res, next) => {
   }
 });
 
+router.get("/projects/:id/tasks", async (req, res, next) => {
+  try {
+    const project = await Project.getProjectTasks(req.params.id);
+    if (!project) {
+      return res.status(404).json({
+        message: "Project not found.",
+      });
+    }
+    res.json(project);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.post("/projects", (req, res) => {
   const projectData = req.body;
 
